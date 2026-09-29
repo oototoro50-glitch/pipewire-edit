@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=PipeWire DAC 設定
+Name[ja]=PipeWire DAC 設定
+Comment=USB DAC 向け PipeWire 設定（接続検出・プロファイル追加）
+Comment[ja]=USB DAC 向け PipeWire 設定（接続検出・プロファイル追加）
+Exec="@EXEC@"
+Icon=audio-card
+Terminal=false
+Categories=AudioVideo;Audio;Settings;
+StartupNotify=true
