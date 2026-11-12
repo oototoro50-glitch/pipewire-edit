@@ -82,13 +82,18 @@ def _attach(grid: Gtk.Grid, row: int, label: str, widget: Gtk.Widget) -> int:
 
 
 def install_desktop_entry() -> None:
-    root = Path(__file__).resolve().parent.parent
+    if getattr(sys, "frozen", False):
+        root = Path(getattr(sys, "_MEIPASS", Path(sys.executable).resolve().parent))
+        exec_path = Path(sys.executable).resolve()
+    else:
+        root = Path(__file__).resolve().parent.parent
+        exec_path = root / "pipewire-dac-gui"
     src = root / "share" / "pipewire-dac-gui.desktop"
     if not src.exists():
         return
     dest_dir = Path.home() / ".local" / "share" / "applications"
     dest = dest_dir / "pipewire-dac-gui.desktop"
-    text = src.read_text(encoding="utf-8").replace("@EXEC@", str(root / "pipewire-dac-gui"))
+    text = src.read_text(encoding="utf-8").replace("@EXEC@", str(exec_path))
     try:
         dest_dir.mkdir(parents=True, exist_ok=True)
         dest.write_text(text, encoding="utf-8")
